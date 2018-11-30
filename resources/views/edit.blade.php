@@ -5,45 +5,34 @@
         <!-- Add Your Content Inside -->
         <div class="content">
             <!-- Remove This Before You Start -->
-            <h1>Table Member</h1>
-            @if(Session::has('alert-success'))
-                <div class="alert alert-success">
-                    <strong>{{ \Illuminate\Support\Facades\Session::get('alert-success') }}</strong>
-                </div>
-            @endif
+            <h1>Edit Member</h1>
             <hr>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>No. HP</th>
-                    <th>Alamat</th>
-                    <th>Aksi</th>
-                </tr>
-                </thead>
-                <tbody>
-                @php $no = 1; @endphp
-                @foreach($data as $d)
-                    <tr>
-                        <td>{{ $no++ }}</td>
-                        <td>{{ $d->nama }}</td>
-                        <td>{{ $d->email }}</td>
-                        <td>{{ $d->nohp }}</td>
-                        <td>{{ $d->alamat }}</td>
-                        <td>
-                            <form action="{{ route('member.destroy', $d->id_member) }}" method="post">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <a href="{{ route('member.edit',$d->id_member) }}" class=" btn btn-sm btn-primary">Edit</a>
-                                <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+            <form action="{{ route('member.store') }}" method="post">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="nama">Nama:</label>
+                    <input type="text" class="form-control" id="usr" name="nama"
+                    value="{{$data->name}}" 
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" id="usr" name="email" value="{{$data->email}}" >
+                </div>
+                <div class="form-group">
+                    <label for="nohp">Password:</label>
+                    <input type="password" class="form-control" id="usr" name="password">
+                </div>
+                <div class="form-group">
+                    <label for="alamat">MacAddress:</label>
+                    <input class="form-control" id="usr" name="macAddress" value="{{$data->macAddress}}" >
+                    </input>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-md btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-md btn-danger">Cancel</button>
+                </div>
+            </form>
         </div>
         <!-- /.content -->
     </section>

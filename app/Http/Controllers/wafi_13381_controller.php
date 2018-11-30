@@ -63,7 +63,7 @@ class wafi_13381_controller extends Controller
      */
     public function edit($id)
     {
-        $data = wafi_13381_model::where('id_member',$id)->get();
+        $data = wafi_13381_model::where('id_member',$id)->first();
         return view('edit',compact('data'));
     }
 
